@@ -1,21 +1,15 @@
-version: "3.8"
-
 services:
   backend:
     build: .
-    container_name: backend
     ports:
-      - "5002:5002"
-    volumes:
-      - .:/app
+      - "5002:5002"  # Varmista, että tässä käytetään oikeaa porttia
+    depends_on:
+      - mysql
 
   nginx:
     image: nginx:latest
-    container_name: nginx
     ports:
-      - "69:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - "69:80"  # Nginxin portti, varmista, että se on oikea
     depends_on:
       - backend
 
